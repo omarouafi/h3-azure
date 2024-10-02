@@ -44,3 +44,54 @@
      --sku Standard_GRS \
      --kind StorageV2
      ```
+2. **Téléchargement d'un Fichier (Blob) dans un Conteneur**  
+    ```bash
+        az storage container create \
+        --name lab4Container \
+        --account-name lab4storageomar
+
+        az storage blob upload \
+            --container-name lab4Container \
+            --file ./test.jpg \
+            --name testblob \
+            --account-name lab4storageomar
+    ```
+3. **Configuration d'une Signature d'Accès Partagé (SAS)**  
+   ```bash
+        az storage container generate-sas \
+            --account-name lab4storageomar \
+            --name lab4Container \
+            --permissions rwl \
+            --expiry 2024-12-31T00:00:00Z \
+            --https-only
+    ```
+
+
+4. **Implémentation des Politiques de Gestion du Cycle de Vie**  
+    
+    ```bash
+    az storage account management-policy create \
+        --account-name lab4storageomar \
+        --policy '{
+            "rules": [
+            {
+                "enabled": true,
+                "name": "MoveToCoolAfter30Days",
+                "type": "Lifecycle",
+                "definition": {
+                "filters": {
+                    "blobTypes": [ "blockBlob" ]
+                },
+                "actions": {
+                    "baseBlob": {
+                    "tierToCool": {
+                        "daysAfterModificationGreaterThan": 30
+                    }
+                    }
+                }
+                }
+            }
+            ]
+        }'
+
+    ```
