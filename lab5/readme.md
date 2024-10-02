@@ -40,9 +40,45 @@
 
    ```bash
     az sql server create \
-        --name omarouafidb \
+        --name omarouafiserverdb \
         --resource-group student \
         --location japaneast \
         --admin-user omarouafi \
         --admin-password Test1234
+    ```
+
+2. **Création de la Base de Données**  
+
+```bash
+    az sql db create \
+    --resource-group student \
+    --server omarouafiserverdb \
+    --name omarouafidb \
+    --service-objective S0
+  ```
+
+3. **Configuration des Paramètres du Pare-feu**  
+    ```bash
+    az sql server firewall-rule create \
+        --resource-group student \
+        --server omarouafiserverdb \
+        --name "AllowIPs" \
+        --start-ip-address 0.0.0.0 \
+        --end-ip-address 0.0.0.0
+    ```
+    
+4. **Connexion à la Base de Données et Importation de Données**  
+   ```bash
+    sqlcmd -S omarouafiserver.database.windows.net -U omarouafi -P Test1234 -d h3db
+    ```
+
+5. **Implémentation de la Géoréplication pour Haute Disponibilité**  
+   ```bash
+   az sql db replica create \
+    --name h3dbreplicas \
+    --resource-group student \
+    --server omarouafiserverdb \
+    --partner-server omarouafiserverreplica \
+    --partner-resource-group omarouafireplicaresource \
+    --location australiaeast
     ```
