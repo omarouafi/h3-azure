@@ -10,9 +10,9 @@ connectionString = "YOUR_CONNECTION_STRING"
 def log_request(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
-    log_data = req.get_json(silent=True)
-
-    if not log_data:
+    try:
+        log_data = req.get_json()
+    except ValueError:
         return func.HttpResponse("No log data provided.", status_code=400)
 
     blob_service_client = BlobServiceClient.from_connection_string(connectionString)
