@@ -2,7 +2,7 @@
 
 RESOURCE_GROUP="MyResourceGroup"
 STORAGE_ACCOUNT="mystorageaccount376"
-FUNCTION_APP_NAME="MyFunctionAppOmarOuafi"
+FUNCTION_APP_NAME="MyFunctionAppOmarOuafi2"
 REGION="japaneast"
 RUNTIME="python"
 FUNCTION_VERSION="4"
@@ -11,9 +11,9 @@ OS="Linux"
 
 az login
 
-# az group create --name $RESOURCE_GROUP --location $REGION
+az group create --name $RESOURCE_GROUP --location $REGION
 
-# az storage account create --name $STORAGE_ACCOUNT --location $REGION --resource-group $RESOURCE_GROUP --sku Standard_LRS
+az storage account create --name $STORAGE_ACCOUNT --location $REGION --resource-group $RESOURCE_GROUP --sku Standard_LRS
 
 az functionapp create \
   --resource-group $RESOURCE_GROUP \
