@@ -44,3 +44,4 @@ J'ai fourni le code qui simule des logs et les pousse vers le stockage en utilis
 ```bash
 func azure functionapp publish MyFunctionApp
 ```
+![Image](./logs.PNG)

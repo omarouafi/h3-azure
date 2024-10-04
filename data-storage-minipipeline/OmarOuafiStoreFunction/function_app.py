@@ -4,7 +4,7 @@ import logging
 from azure.storage.blob import BlobServiceClient
 
 app = func.FunctionApp()
-connectionString = "YOUR_CONNECTION_STRING"
+connectionString = "DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=omarouafistorage;AccountKey=OoQ2wit0basoqjgSJdNOVj95p15J+xzgVEVT7YulEnDX2M58cdElEsmlwl1u+aYEmHaABZNmBzMb+AStkdhjGQ==;BlobEndpoint=https://omarouafistorage.blob.core.windows.net/;FileEndpoint=https://omarouafistorage.file.core.windows.net/;QueueEndpoint=https://omarouafistorage.queue.core.windows.net/;TableEndpoint=https://omarouafistorage.table.core.windows.net/"
 
 @app.route(route="log_request", auth_level=func.AuthLevel.ANONYMOUS)
 def log_request(req: func.HttpRequest) -> func.HttpResponse:
